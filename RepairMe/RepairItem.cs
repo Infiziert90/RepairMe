@@ -1,4 +1,6 @@
-﻿using Vintagestory.API.Common;
+﻿using System;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
 
 namespace RepairMe;
 
@@ -12,11 +14,28 @@ public class RepairItem : Item
             return;
         }
         
-        var mouseSlotItem = byPlayer.InventoryManager.MouseItemSlot;
-        var changes = CalculateDurabilityChange(mouseSlotItem.Itemstack);
+        try
+        {
+            var mouseSlotItem = byPlayer.InventoryManager.MouseItemSlot;
+            if (mouseSlotItem.Empty)
+            {
+                base.OnConsumedByCrafting(allInputSlots, stackInSlot, gridRecipe, fromIngredient, byPlayer, quantity);
+            
+                api.Logger.Error("Repair has been reset to prevent item duplication.");
+                ((ICoreClientAPI) api).TriggerIngameError(sender: this, errorCode: "exceptionShift", text: "Using <hk>shift</hk> while repairing is currently broken, please drag&drop the output instead.");
+                
+                return;
+            }
+            
+            var changes = CalculateDurabilityChange(mouseSlotItem.Itemstack);
         
-        stackInSlot.Itemstack.Collectible.DamageItem(byPlayer.Entity.World, byPlayer.Entity, stackInSlot, changes.WhetstoneDur);
-        mouseSlotItem.Itemstack.Item.SetDurability(mouseSlotItem.Itemstack, changes.ItemDur);
+            stackInSlot.Itemstack.Collectible.DamageItem(byPlayer.Entity.World, byPlayer.Entity, stackInSlot, changes.WhetstoneDur);
+            mouseSlotItem.Itemstack.Item.SetDurability(mouseSlotItem.Itemstack, changes.ItemDur);
+        }
+        catch (Exception ex)
+        {
+            
+        }
     }
 
     private (int WhetstoneDur, int ItemDur) CalculateDurabilityChange(ItemStack repairedTool)
