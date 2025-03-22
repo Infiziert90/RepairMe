@@ -1,0 +1,28 @@
+﻿{
+  "code": "whetstone",
+  "tool": 555,
+  "class": "repair",
+  "creativeinventory": { "general": ["*"], "items": ["*"], "tools": ["*"] },
+  "textures": {
+    "material": { "base": "game:item/tool/material/chert" },
+    "upper": { "base": "game:item/tool/material/granite" }
+  },
+  "shape": { "base": "item/whetstone" },
+  "sounds": {
+    "place": "game:block/anvil",
+    "break": "game:block/anvil",
+    "hit": "game:block/anvil",
+    "walk": "game:block/anvil"
+  },
+  "tooltier": 5,
+  "maxStackSize": 1,
+  "durabilitybytype": {
+    "*": 300
+  },
+  "guiTransform": {
+    "translation": { "x": 2, "y": 1, "z": 0 },
+    "rotation": { "x": 150, "y": -38, "z": 0 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 3.8
+  }
+}
