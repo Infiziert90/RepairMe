@@ -34,7 +34,7 @@ public class RecipeGeneration : ModSystem
             recipe.Height = 2;
             recipe.Shapeless = true;
             recipe.AverageDurability = false;
-            recipe.Name = new AssetLocation("repairme", $"{item.Code.Path} repair");
+            recipe.Name = new AssetLocation("repairme", $"{item.Code.Path} whetstonerepair");
             recipe.CopyAttributesFrom = "T";
             recipe.RecipeGroup = 1;
             recipe.Output = new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code, };
@@ -45,7 +45,7 @@ public class RecipeGeneration : ModSystem
                 { "T", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code } }
             };
 
-            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} repair"), recipe);
+            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} whetstonerepair"), recipe);
         }
     }
 }
