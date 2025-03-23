@@ -28,13 +28,9 @@ public class RepairItem : Item
     {
         var maxDurability = repairedTool.Item.GetMaxDurability(repairedTool);
         var remainingDurability = repairedTool.Item.GetRemainingDurability(repairedTool);
-
-        RepairMeModSystem.Logger.Debug($"Remaining Durability: {remainingDurability} Total Durability: {maxDurability}");
         
         var damagedDurability = (maxDurability / 100.0f) * 5;
         var repairedDurability = remainingDurability + ((maxDurability / 100.0f) * 25.0f);
-        
-        RepairMeModSystem.Logger.Debug($"damagedDurability: {damagedDurability} repairedDurability: {repairedDurability}");
 
         // Minimum durability damage for the whetstone is 10
         if (damagedDurability < 10)
