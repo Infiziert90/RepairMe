@@ -7,7 +7,7 @@ public class RepairItem : Item
 {
     public override void OnConsumedByCrafting(ItemSlot[] allInputSlots, ItemSlot stackInSlot, GridRecipe gridRecipe, CraftingRecipeIngredient fromIngredient, IPlayer byPlayer, int quantity)
     {
-        if (!gridRecipe.Name.Path.Contains("whetstonerepair"))
+        if (!gridRecipe.Name.Path.Contains("useWhetstone"))
         {
             base.OnConsumedByCrafting(allInputSlots, stackInSlot, gridRecipe, fromIngredient, byPlayer, quantity);
             return;
@@ -15,11 +15,8 @@ public class RepairItem : Item
         
         try
         {
-            var outputItemStack = gridRecipe.Output.ResolvedItemstack;
-            var changes = CalculateDurabilityChange(outputItemStack);
-        
+            var changes = CalculateDurabilityChange(gridRecipe.Output.ResolvedItemstack);
             stackInSlot.Itemstack.Item.DamageItem(byPlayer.Entity.World, byPlayer.Entity, stackInSlot, changes.WhetstoneDur);
-            outputItemStack.Item.SetDurability(outputItemStack, changes.ItemDur);
         }
         catch (Exception ex)
         {
@@ -27,13 +24,17 @@ public class RepairItem : Item
         }
     }
 
-    private (int WhetstoneDur, int ItemDur) CalculateDurabilityChange(ItemStack repairedTool)
+    public static (int WhetstoneDur, int ItemDur) CalculateDurabilityChange(ItemStack repairedTool)
     {
         var maxDurability = repairedTool.Item.GetMaxDurability(repairedTool);
         var remainingDurability = repairedTool.Item.GetRemainingDurability(repairedTool);
 
-        var damagedDurability = (maxDurability / 100) * 5;
-        var repairedDurability = remainingDurability + ((maxDurability / 100) * 25);
+        RepairMeModSystem.Logger.Debug($"Remaining Durability: {remainingDurability} Total Durability: {maxDurability}");
+        
+        var damagedDurability = (maxDurability / 100.0f) * 5;
+        var repairedDurability = remainingDurability + ((maxDurability / 100.0f) * 25.0f);
+        
+        RepairMeModSystem.Logger.Debug($"damagedDurability: {damagedDurability} repairedDurability: {repairedDurability}");
 
         // Minimum durability damage for the whetstone is 10
         if (damagedDurability < 10)
@@ -43,6 +44,6 @@ public class RepairItem : Item
         if (repairedDurability > maxDurability)
             repairedDurability = maxDurability;
         
-        return (damagedDurability, repairedDurability);
+        return ((int)damagedDurability, (int)repairedDurability);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.ServerMods;
 
@@ -6,6 +7,8 @@ namespace RepairMe;
 
 public class RecipeGeneration : ModSystem
 {
+    public static Harmony HarmonyInstance;
+    
     public override bool ShouldLoad(EnumAppSide forSide) => forSide.IsServer();
     public override double ExecuteOrder() => 1.02;
     
@@ -34,7 +37,7 @@ public class RecipeGeneration : ModSystem
             recipe.Height = 2;
             recipe.Shapeless = true;
             recipe.AverageDurability = false;
-            recipe.Name = new AssetLocation("repairme", $"{item.Code.Path} whetstonerepair");
+            recipe.Name = new AssetLocation("repairme", $"{item.Code.Path} useWhetstone");
             recipe.CopyAttributesFrom = "T";
             recipe.RecipeGroup = 1;
             recipe.Output = new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code, };
@@ -45,7 +48,28 @@ public class RecipeGeneration : ModSystem
                 { "T", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code } }
             };
 
-            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} whetstonerepair"), recipe);
+            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} useWhetstone"), recipe);
         }
+
+        Patch();
+    }
+
+    private void Patch()
+    {
+        if (HarmonyInstance != null) 
+            return;
+        
+        HarmonyInstance = new Harmony(Mod.Info.ModID);
+        Mod.Logger.Debug("Patching...");
+        
+        HarmonyInstance.PatchCategory("whetstoneRepairPatch");
+        Mod.Logger.Debug("Patched Whetstone Repair...");
+    }
+
+    public override void Dispose()
+    {
+        Mod.Logger.VerboseDebug("Unpatching...");
+        HarmonyInstance?.UnpatchAll();
+        HarmonyInstance = null;
     }
 }
