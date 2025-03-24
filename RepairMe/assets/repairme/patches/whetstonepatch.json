@@ -1,0 +1,10 @@
+﻿[
+  {
+    "op": "add",
+    "path": "/game:v1.20.6whetstonevariantv4",
+    "value": [
+      "/iir remap repairme:whetstone-flint repairme:whetstone force"
+    ],
+    "file": "game:config/remaps.json"
+  }
+]

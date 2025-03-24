@@ -1,11 +1,68 @@
-﻿{
-  "ingredientPattern": "F,S,S,S",
-  "ingredients": {
-    "S": { "type": "item", "code": "game:stone-*", "name": "rock", "quantity": 1 },
-    "F": { "type": "item", "code": "game:flint", "quantity": 1 }
+﻿[
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:stone-*", "name": "rock", "quantity": 1 },
+      "F": { "type": "item", "code": "game:flint", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-flint", "quantity": 1 }
   },
-  "width": 2,
-  "height": 2,
-  "shapeless": true,
-  "output": { "type": "item", "code": "repairme:whetstone", "quantity": 1 }
-}
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:plank-*", "name": "wood", "quantity": 1 },
+      "F": { "type": "item", "code": "game:ore-lapislazuli", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-lapislazuli", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:plank-*", "name": "wood", "quantity": 1 },
+      "F": { "type": "item", "code": "game:gem-olivine_peridot-rough", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-peridot", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:plank-*", "name": "wood", "quantity": 1 },
+      "F": { "type": "item", "code": "game:amethyst", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-amethyst", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:plank-*", "name": "wood", "quantity": 1 },
+      "F": { "type": "item", "code": "game:gem-emerald-rough", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-emerald", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "F,S,S,S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:plank-*", "name": "wood", "quantity": 1 },
+      "F": { "type": "item", "code": "game:gem-diamond-rough", "quantity": 1 }
+    },
+    "width": 2,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "repairme:whetstone-diamond", "quantity": 1 }
+  }
+]

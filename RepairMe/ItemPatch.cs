@@ -14,7 +14,7 @@ public class ItemPatch
         if (outputSlot.Itemstack == null)
             return;
         
-        if (!byRecipe.Name.Path.Contains("useWhetstone"))
+        if (!byRecipe.Name.Path.Contains("use-whetstone"))
             return;
         
         var changes = RepairItem.CalculateDurabilityChange(outputSlot.Itemstack);

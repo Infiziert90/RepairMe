@@ -1,4 +1,14 @@
 {
-    "item-whetstone": "Whetstone",
-    "itemdesc-whetstone": "A whetstone used to repair any tool."
+    "item-whetstone-flint": "Whetstone",
+    "item-whetstone-lapislazuli": "Lapis Lazuli Whetstone",
+    "item-whetstone-peridot": "Peridot Whetstone",
+    "item-whetstone-amethyst": "Amethyst Whetstone",
+    "item-whetstone-emerald": "Emerald Whetstone",
+    "item-whetstone-diamond": "Diamond Whetstone",
+    "itemdesc-whetstone-flint": "A flint covered whetstone used to repair any tool.",
+    "itemdesc-whetstone-lapislazuli": "A lapis lazuli covered whetstone used to repair any tool.",
+    "itemdesc-whetstone-peridot": "A peridot covered whetstone used to repair any tool.",
+    "itemdesc-whetstone-amethyst": "An amethyst covered whetstone used to repair any tool.",
+    "itemdesc-whetstone-emerald": "An emerald covered whetstone used to repair any tool.",
+    "itemdesc-whetstone-diamond": "A diamond covered whetstone used to repair any tool."
 }

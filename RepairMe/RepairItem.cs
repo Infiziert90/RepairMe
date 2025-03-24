@@ -7,7 +7,7 @@ public class RepairItem : Item
 {
     public override void OnConsumedByCrafting(ItemSlot[] allInputSlots, ItemSlot stackInSlot, GridRecipe gridRecipe, CraftingRecipeIngredient fromIngredient, IPlayer byPlayer, int quantity)
     {
-        if (!gridRecipe.Name.Path.Contains("useWhetstone"))
+        if (!gridRecipe.Name.Path.Contains("use-whetstone"))
         {
             base.OnConsumedByCrafting(allInputSlots, stackInSlot, gridRecipe, fromIngredient, byPlayer, quantity);
             return;

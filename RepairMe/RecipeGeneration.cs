@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.ServerMods;
@@ -7,7 +8,7 @@ namespace RepairMe;
 
 public class RecipeGeneration : ModSystem
 {
-    public static Harmony HarmonyInstance;
+    private static Harmony HarmonyInstance;
     
     public override bool ShouldLoad(EnumAppSide forSide) => forSide.IsServer();
     public override double ExecuteOrder() => 1.02;
@@ -16,7 +17,14 @@ public class RecipeGeneration : ModSystem
     {
         var gridRecipeLoader = api.ModLoader.GetModSystem<GridRecipeLoader>();
 
-        var whetstone = api.World.GetItem(new AssetLocation("repairme", "whetstone"));
+        Item[] whetstones = [
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-flint")), 
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-lapislazuli")),
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-peridot")),
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-amethyst")),
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-emerald")),
+            api.World.GetItem(new AssetLocation("repairme", "whetstone-diamond")),
+        ];
         
         foreach (var item in api.World.Items)
         {
@@ -28,7 +36,7 @@ public class RecipeGeneration : ModSystem
                 continue;
             
             // Prevent repair of the whetstone with a whetstone
-            if (item.ItemId == whetstone.ItemId)
+            if (whetstones.Any(i => i.ItemId == item.ItemId))
                 continue;
             
             var recipe = new GridRecipe();
@@ -37,18 +45,18 @@ public class RecipeGeneration : ModSystem
             recipe.Height = 2;
             recipe.Shapeless = true;
             recipe.AverageDurability = false;
-            recipe.Name = new AssetLocation("repairme", $"{item.Code.Path} useWhetstone");
+            recipe.Name = new AssetLocation($"repairme:{item.Code.Path} use-whetstone");
             recipe.CopyAttributesFrom = "T";
             recipe.RecipeGroup = 1;
             recipe.Output = new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code, };
 
             recipe.Ingredients = new Dictionary<string, CraftingRecipeIngredient>()
             {
-                { "W", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = whetstone.Code, IsTool = true } },
+                { "W", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = "repairme:whetstone-*", IsTool = true } },
                 { "T", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code } }
             };
 
-            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} useWhetstone"), recipe);
+            gridRecipeLoader.LoadRecipe(new AssetLocation($"repairme:{item.Code.Path} use-whetstone"), recipe);
         }
 
         Patch();
