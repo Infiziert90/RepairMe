@@ -50,7 +50,7 @@ public class RecipeGeneration : ModSystem
             recipe.RecipeGroup = 1;
             recipe.Output = new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code, };
 
-            recipe.Ingredients = new Dictionary<string, CraftingRecipeIngredient>()
+            recipe.Ingredients = new Dictionary<string, CraftingRecipeIngredient>
             {
                 { "W", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = "repairme:whetstone-*", IsTool = true } },
                 { "T", new CraftingRecipeIngredient { Type = EnumItemClass.Item, Code = item.Code } }
